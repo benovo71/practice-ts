@@ -1,0 +1,22 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+  padding: 100px 30px;
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-gray-1);
+}
+
+input,
+label,
+button {
+  transition-duration: var(--transition-duration);
+}
+
+:focus-visible {
+  border-radius: var(--border-radius);
+  outline: 2px dashed var(--color-black);
+  outline-offset: 1px;
+  transition-duration: 0s !important;
+}

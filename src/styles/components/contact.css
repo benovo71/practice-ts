@@ -1,0 +1,22 @@
+.contact {
+  padding: 24px;
+  background-color: var(--color-white);
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.contact__title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.contact__form {
+  margin-bottom: 20px;
+}
+
+.contact__total {
+  font-weight: 600;
+}

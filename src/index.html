@@ -10,39 +10,81 @@
   <body>
     <div class="contact">
       <h1 class="contact__title">Contact list on JS</h1>
-      <form class="contact__form">
+
+      <!-- Форма добавления контакта -->
+      <form class="contact__form" id="contactForm">
         <div class="contact__field field">
           <label class="field__label" for="name">Name</label>
           <input
             class="field__input"
             id="name"
+            name="name"
             type="text"
             placeholder="Your name"
             autocomplete="off"
           />
+
           <label class="field__label" for="vacancy">Vacancy</label>
           <input
             class="field__input"
             id="vacancy"
+            name="vacancy"
             type="text"
             placeholder="Vacancy"
             autocomplete="off"
           />
+
           <label class="field__label" for="phone">Phone</label>
           <input
             class="field__input"
             id="phone"
+            name="phone"
             type="tel"
             placeholder="+7-999-999-99-99"
             autocomplete="off"
           />
-          <button class="button" type="submit" id="add">Add</button>
-          <button class="button" type="button">Clear list</button>
-          <button class="button" type="button">Search</button>
+
+          <button class="button" type="submit" id="addBtn">Add</button>
+          <button class="button" type="button" id="clearBtn">Clear list</button>
+          <button class="button" type="button" id="searchBtn">Search</button>
         </div>
       </form>
 
-      <ul class="alphabet"></ul>
+      <div class="error" id="error"></div>
+
+      <!-- Алфавитный индекс -->
+      <ul class="alphabet" id="alphabet"></ul>
+
+      <!-- Список контактов -->
+      <div class="contacts-list" id="contactsList"></div>
+
+      <!-- Модальное окно редактирования -->
+      <div class="modal" id="editModal" style="display: none">
+        <div class="modal-content">
+          <h2>Edit contact</h2>
+          <form id="editForm">
+            <input type="text" id="editName" placeholder="Name" required />
+            <input
+              type="text"
+              id="editVacancy"
+              placeholder="Vacancy"
+              required
+            />
+            <input type="tel" id="editPhone" placeholder="Phone" required />
+            <button type="submit">Save</button>
+            <button type="button" onclick="closeEditModal()">Cancel</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Модальное окно поиска -->
+      <div class="modal" id="searchModal" style="display: none">
+        <div class="modal-content">
+          <h2>Search contacts</h2>
+          <input type="text" id="searchInput" placeholder="Search by name..." />
+          <div id="searchResults"></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

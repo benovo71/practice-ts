@@ -23,6 +23,7 @@
             placeholder="Your name"
             autocomplete="off"
           />
+          <span class="error" id="name-error"></span>
 
           <label class="field__label" for="vacancy">Vacancy</label>
           <input
@@ -33,6 +34,7 @@
             placeholder="Vacancy"
             autocomplete="off"
           />
+          <span class="error" id="vacancy-error"></span>
 
           <label class="field__label" for="phone">Phone</label>
           <input
@@ -43,14 +45,13 @@
             placeholder="+7-999-999-99-99"
             autocomplete="off"
           />
+          <span class="error" id="phone-error"></span>
 
           <button class="button" type="submit" id="addBtn">Add</button>
           <button class="button" type="button" id="clearBtn">Clear list</button>
           <button class="button" type="button" id="searchBtn">Search</button>
         </div>
       </form>
-
-      <div class="error" id="error"></div>
 
       <!-- Алфавитный индекс -->
       <ul class="alphabet" id="alphabet"></ul>
@@ -63,16 +64,22 @@
         <div class="modal-content">
           <h2>Edit contact</h2>
           <form id="editForm">
-            <input type="text" id="editName" placeholder="Name" required />
+            <input type="text" id="editName" placeholder="Name" />
+            <span class="error" id="editName-error"></span>
+
             <input
               type="text"
               id="editVacancy"
               placeholder="Vacancy"
               required
             />
-            <input type="tel" id="editPhone" placeholder="Phone" required />
+            <span class="error" id="editVacancy-error"></span>
+
+            <input type="tel" id="editPhone" placeholder="Phone" />
+            <span class="error" id="editPhone-error"></span>
+
             <button type="submit">Save</button>
-            <button type="button" onclick="closeEditModal()">Cancel</button>
+            <button type="button">Cancel</button>
           </form>
         </div>
       </div>

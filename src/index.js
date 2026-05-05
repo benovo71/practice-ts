@@ -14,8 +14,12 @@ const appState = {
 function loadContactsFromStorage() {
   const storedData = localStorage.getItem("contacts");
 
-  if (storedData) {
+  if (!storedData) return;
+  try {
     appState.contacts = JSON.parse(storedData);
+  } catch {
+    appState.contacts = [];
+    localStorage.removeItem("contacts");
   }
 }
 
@@ -95,8 +99,8 @@ function validateForm(nameId, vacancyId, phoneId) {
   if (!name) {
     showError(nameErr, "Name is required");
     valid = false;
-  } else if (!/^[a-zA-Zа-яА-Я\s]+$/.test(name)) {
-    showError(nameErr, "Only letters and spaces");
+  } else if (!/^[a-zA-Zа-яА-Я\s'\-\.]+$/.test(name)) {
+    showError(nameErr, "Invalid characters in name");
     valid = false;
   }
 
@@ -104,7 +108,7 @@ function validateForm(nameId, vacancyId, phoneId) {
   if (!vacancy) {
     showError(vacancyErr, "Vacancy is required");
     valid = false;
-  } else if (!/^[a-zA-Zа-яА-Я\s]+$/.test(vacancy)) {
+  } else if (!/^[a-zA-Zа-яА-Я\s'\-\.]+$/.test(vacancy)) {
     showError(vacancyErr, "Only letters and spaces");
     valid = false;
   }
@@ -209,11 +213,11 @@ function renderContacts(contactsToShow = null) {
       (contact) => `
     <div class="contact-item" data-id="${contact.id}">
       <h3 class="contact-item__name">${escapeHtml(contact.name)}</h3>
-      <p class="contact-item__vacancy"><strong>Должность:</strong> ${escapeHtml(contact.vacancy)}</p>
-      <p class="contact-item__phone"><strong>Телефон:</strong> ${escapeHtml(contact.phone)}</p>
+      <p class="contact-item__vacancy"><strong>Vacancy:</strong> ${escapeHtml(contact.vacancy)}</p>
+      <p class="contact-item__phone"><strong>Phone:</strong> ${escapeHtml(contact.phone)}</p>
       <div class="contact-item__actions">
-        <button class="button button--edit" data-action="edit">Редактировать</button>
-        <button class="button button--delete" data-action="delete">Удалить</button>
+        <button class="button button--edit" data-action="edit">Edit</button>
+        <button class="button button--delete" data-action="delete">Delete</button>
       </div>
     </div>
   `,
@@ -242,8 +246,8 @@ function renderSearchResults(results) {
       <h4 class="search-result__name">${escapeHtml(contact.name)}</h4>
       <p class="search-result__details">${escapeHtml(contact.vacancy)} | ${escapeHtml(contact.phone)}</p>
       <div class="search-result__actions">
-        <button class="button button--small" data-action="edit">Редактировать</button>
-        <button class="button button--small" data-action="delete">Удалить</button>
+        <button class="button button--small" data-action="edit">Edit</button>
+        <button class="button button--small" data-action="delete">Delete</button>
       </div>
     </div>
   `,
@@ -277,14 +281,14 @@ function openEditModal(id) {
   document.querySelector("#editPhone").value = contact.phone;
 
   // Показываем модальное окно
-  document.querySelector("#editModal").style.display = "block";
+  document.querySelector("#editModal").classList.add("modal--visible");
 }
 
 /**
  * Закрывает модальное окно редактирования и сбрасывает состояние
  */
 function closeEditModal() {
-  document.querySelector("#editModal").style.display = "none";
+  document.querySelector("#editModal").classList.remove("modal--visible");
   appState.editingId = null;
 
   // Очищаем поля формы
@@ -297,7 +301,7 @@ function closeEditModal() {
  * Открывает модальное окно поиска
  */
 function openSearchModal() {
-  document.querySelector("#searchModal").style.display = "block";
+  document.querySelector("#searchModal").classList.add("modal--visible");
   document.querySelector("#searchInput").value = "";
   document.querySelector("#searchResults").innerHTML = "";
 
@@ -311,7 +315,7 @@ function openSearchModal() {
  * Закрывает модальное окно поиска
  */
 function closeSearchModal() {
-  document.querySelector("#searchModal").style.display = "none";
+  document.querySelector("#searchModal").classList.remove("modal--visible");
 }
 
 /**
@@ -331,7 +335,7 @@ function handleAddContact(e) {
 
   // Создаём новый контакт
   const newContact = {
-    id: Date.now(),
+    id: crypto.randomUUID(),
     name: name.trim(),
     vacancy: vacancy.trim(),
     phone: phone.trim(),
@@ -475,7 +479,7 @@ function setupEventListeners() {
     const contactItem = button.closest("[data-id]");
     if (!contactItem) return;
 
-    const id = Number(contactItem.dataset.id);
+    const id = contactItem.dataset.id;
     const action = button.dataset.action;
 
     if (action === "edit") {
@@ -493,7 +497,7 @@ function setupEventListeners() {
     const resultItem = button.closest("[data-id]");
     if (!resultItem) return;
 
-    const id = Number(resultItem.dataset.id);
+    const id = resultItem.dataset.id;
     const action = button.dataset.action;
 
     if (action === "edit") {
@@ -509,8 +513,10 @@ function setupEventListeners() {
 
   // Закрытие модальных окон по клику на затемнённую область
   window.addEventListener("click", (e) => {
-    if (e.target.id === "editModal") closeEditModal();
-    if (e.target.id === "searchModal") closeSearchModal();
+    if (e.target.id === "editModal" || e.target.id === "modal-close__btn")
+      closeEditModal();
+    if (e.target.id === "searchModal" || e.target.id === "modal-close__btn")
+      closeSearchModal();
   });
 
   // Закрытие модальных окон по нажатию Escape

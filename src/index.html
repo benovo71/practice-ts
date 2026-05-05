@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="index.js"></script>
+
     <link rel="stylesheet" href="./styles/index.css" />
     <title>Contact list on JS</title>
   </head>
@@ -60,38 +60,46 @@
       <div class="contacts-list" id="contactsList"></div>
 
       <!-- Модальное окно редактирования -->
-      <div class="modal" id="editModal" style="display: none">
+      <div class="modal" name="editModal" id="editModal">
         <div class="modal-content">
+          <span class="modal-close__btn" id="modal-close__btn">×</span>
           <h2>Edit contact</h2>
           <form id="editForm">
-            <input type="text" id="editName" placeholder="Name" />
+            <input
+              type="text"
+              name="editName"
+              id="editName"
+              placeholder="Name"
+            />
             <span class="error" id="editName-error"></span>
 
             <input
               type="text"
+              name="editVacancy"
               id="editVacancy"
               placeholder="Vacancy"
-              required
             />
             <span class="error" id="editVacancy-error"></span>
 
             <input type="tel" id="editPhone" placeholder="Phone" />
             <span class="error" id="editPhone-error"></span>
 
-            <button type="submit">Save</button>
-            <button type="button">Cancel</button>
+            <button class="button" type="submit">Save</button>
+            <button class="button" type="button">Cancel</button>
           </form>
         </div>
       </div>
 
       <!-- Модальное окно поиска -->
-      <div class="modal" id="searchModal" style="display: none">
+      <div class="modal" id="searchModal">
         <div class="modal-content">
+          <span class="modal-close__btn" id="modal-close__btn">×</span>
           <h2>Search contacts</h2>
           <input type="text" id="searchInput" placeholder="Search by name..." />
           <div id="searchResults"></div>
         </div>
       </div>
     </div>
+    <script type="module" src="index.js"></script>
   </body>
 </html>

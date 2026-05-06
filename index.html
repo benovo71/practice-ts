@@ -8,6 +8,13 @@
     <title>Contact list on JS</title>
   </head>
   <body>
+    <div class="snippet-holidays">
+      <a class="snippet-link" href="">
+        <img class="snippet-img" src="./snippet.jpg" />
+      </a>
+      <button class="snippet-close-button">-</button>
+    </div>
+
     <div class="contact">
       <h1 class="contact__title">Contact list on JS</h1>
 
@@ -60,46 +67,85 @@
       <div class="contacts-list" id="contactsList"></div>
 
       <!-- Модальное окно редактирования -->
-      <div class="modal" name="editModal" id="editModal">
+      <div
+        class="modal"
+        name="editModal"
+        id="editModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
         <div class="modal-content">
-          <span class="modal-close__btn" id="modal-close__btn">×</span>
-          <h2>Edit contact</h2>
+          <button
+            class="modal-close__btn"
+            id="modal-close__btn"
+            aria-label="Закрыть"
+          >
+            ×
+          </button>
+          <h2 id="modal-title">Edit contact</h2>
+
           <form id="editForm">
+            <label for="editName" class="visually-hidden">Name</label>
             <input
               type="text"
               name="editName"
               id="editName"
               placeholder="Name"
+              aria-describedby="editName-error"
             />
-            <span class="error" id="editName-error"></span>
+            <span class="error" id="editName-error" role="alert"></span>
 
+            <label for="editVacancy" class="visually-hidden">Vacancy</label>
             <input
               type="text"
               name="editVacancy"
               id="editVacancy"
               placeholder="Vacancy"
+              aria-describedby="editVacancy-error"
             />
-            <span class="error" id="editVacancy-error"></span>
+            <span class="error" id="editVacancy-error" role="alert"></span>
 
-            <input type="tel" id="editPhone" placeholder="Phone" />
-            <span class="error" id="editPhone-error"></span>
+            <label for="editPhone" class="visually-hidden">Phone</label>
+            <input
+              type="tel"
+              id="editPhone"
+              placeholder="Phone"
+              aria-describedby="editPhone-error"
+            />
+            <span class="error" id="editPhone-error" role="alert"></span>
 
             <button class="button" type="submit">Save</button>
-            <button class="button" type="button">Cancel</button>
+            <button class="button" type="button" id="cancelBtn">Cancel</button>
           </form>
         </div>
       </div>
 
       <!-- Модальное окно поиска -->
-      <div class="modal" id="searchModal">
+      <div
+        class="modal"
+        id="searchModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
         <div class="modal-content">
-          <span class="modal-close__btn" id="modal-close__btn">×</span>
-          <h2>Search contacts</h2>
+          <button
+            class="modal-close__btn"
+            id="modal-close__btn"
+            aria-label="Закрыть"
+          >
+            ×
+          </button>
+          <h2 id="modal-title">Search contacts</h2>
+          <label for="searchInput" class="visually-hidden"
+            >Search by name</label
+          >
           <input type="text" id="searchInput" placeholder="Search by name..." />
           <div id="searchResults"></div>
         </div>
       </div>
     </div>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>

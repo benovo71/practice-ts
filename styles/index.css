@@ -130,31 +130,3 @@ input {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-
-.snippet-holidays {
-  max-width: 150px;
-  height: auto;
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-}
-
-.snippet-close-button {
-  box-sizing: border-box;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  font-size: 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-left: 5px;
-  background-color: #f15a22;
-  color: white;
-  line-height: 1;
-}
-.snippet-link {
-}
-.snippet-img {
-  max-width: 140px;
-  border-radius: 10px;
-}

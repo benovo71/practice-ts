@@ -106,7 +106,9 @@ export function setupEventListeners() {
   // Закрытие по клику вне модалки (на затемнение)
   window.addEventListener("click", (e) => {
     // Проверяем, что клик был именно по фону модалки
-    if (e.target.id === "editModal") closeEditModal();
-    if (e.target.id === "searchModal") closeSearchModal();
+    if (e.target.id === "editModal" || e.target.id === "modal-close__btn")
+      closeEditModal();
+    if (e.target.id === "searchModal" || e.target.id === "modal-close__btn")
+      closeSearchModal();
   });
 }

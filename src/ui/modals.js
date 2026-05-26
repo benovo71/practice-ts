@@ -60,6 +60,7 @@ export function openEditModal(id) {
 
 export function closeEditModal() {
   const modal = document.querySelector("#editModal");
+
   if (!modal) return;
 
   modal.classList.remove("modal--visible");

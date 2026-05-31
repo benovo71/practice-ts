@@ -1,12 +1,16 @@
 import { appState } from "../state.js";
 import { escapeHtml } from "../utils.js";
+import type { Contact } from "../types.js";
 
-export function renderAlphabetIndex() {
-  const container = document.querySelector("#alphabet");
+/**
+ * Рендерит алфавитный индекс на основе первых букв имён контактов
+ */
+export function renderAlphabetIndex(): void {
+  const container = document.querySelector("#alphabet") as HTMLElement | null;
   if (!container) return;
 
   const letters = appState.contacts
-    .map((c) => c.name[0]?.toUpperCase() || "")
+    .map((c: Contact) => c.name[0]?.toUpperCase() || "")
     .filter(Boolean);
   const unique = [...new Set(letters)].sort((a, b) => a.localeCompare(b, "ru"));
 
@@ -17,7 +21,7 @@ export function renderAlphabetIndex() {
 
   container.innerHTML = unique
     .map((letter) => {
-      const count = appState.contacts.filter((c) =>
+      const count = appState.contacts.filter((c: Contact) =>
         c.name.toUpperCase().startsWith(letter),
       ).length;
       return `<li data-letter="${letter}" class="alphabet__item">
@@ -27,11 +31,15 @@ export function renderAlphabetIndex() {
     .join("");
 }
 
-export function renderContacts(contactsToShow = null) {
-  const container = document.querySelector("#contactsList");
+/**
+ * Рендерит список контактов
+ * @param contactsToShow - опциональный массив контактов для отображения (если не указан, используются все контакты)
+ */
+export function renderContacts(contactsToShow: Contact[] | null = null): void {
+  const container = document.querySelector("#contactsList") as HTMLElement | null;
   if (!container) return;
 
-  const list = contactsToShow || appState.contacts;
+  const list = contactsToShow ?? appState.contacts;
 
   if (list.length === 0) {
     container.innerHTML = '<p class="contacts-empty">The list is empty</p>';
@@ -39,9 +47,9 @@ export function renderContacts(contactsToShow = null) {
   }
 
   container.innerHTML = list
-    .sort((a, b) => a.name.localeCompare(b.name, "en"))
+    .sort((a: Contact, b: Contact) => a.name.localeCompare(b.name, "en"))
     .map(
-      (c) => `
+      (c: Contact) => `
       <div class="contact-item" data-id="${c.id}">
         <h3 class="contact-item__name">${escapeHtml(c.name)}</h3>
         <p class="contact-item__vacancy"><strong>Vacancy:</strong> ${escapeHtml(c.vacancy)}</p>
@@ -56,8 +64,12 @@ export function renderContacts(contactsToShow = null) {
     .join("");
 }
 
-export function renderSearchResults(results) {
-  const container = document.querySelector("#searchResults");
+/**
+ * Рендерит результаты поиска
+ * @param results - массив найденных контактов
+ */
+export function renderSearchResults(results: Contact[]): void {
+  const container = document.querySelector("#searchResults") as HTMLElement | null;
   if (!container) return;
 
   if (results.length === 0) {
@@ -67,7 +79,7 @@ export function renderSearchResults(results) {
 
   container.innerHTML = results
     .map(
-      (c) => `
+      (c: Contact) => `
     <div class="search-result-item" data-id="${c.id}">
       <h4 class="search-result__name">${escapeHtml(c.name)}</h4>
       <p class="search-result__details">${escapeHtml(c.vacancy)} | ${escapeHtml(c.phone)}</p>

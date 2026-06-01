@@ -50,7 +50,7 @@ export function setupEventListeners(): void {
 
   // Кнопка Cancel в модальном окне редактирования
   const cancelEditBtn = document.querySelector(
-    "#cancelEditBtn",
+    "#cancelBtn",
   ) as HTMLButtonElement | null;
   cancelEditBtn?.addEventListener("click", closeEditModal);
 
@@ -86,10 +86,11 @@ export function setupEventListeners(): void {
     renderSearchResults(results);
   });
 
-  // --- Алфавитный индекс ---
   const alphabetContainer = document.querySelector(
     "#alphabet",
   ) as HTMLElement | null;
+
+  // --- Алфавитный индекс ---
   alphabetContainer?.addEventListener("click", (e: Event) => {
     const target = e.target as HTMLElement;
     const el = target.closest("[data-letter]") as HTMLElement | null;

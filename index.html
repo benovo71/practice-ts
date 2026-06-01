@@ -71,12 +71,12 @@
         <div class="modal-content">
           <button
             class="modal-close__btn"
-            id="modal-close__btn"
+            id="edit-modal-close"
             aria-label="Закрыть"
           >
             ×
           </button>
-          <h2 id="modal-title">Edit contact</h2>
+          <h2 id="edit-modal-title">Edit contact</h2>
 
           <form id="editForm">
             <label for="editName" class="visually-hidden">Name</label>
@@ -102,6 +102,7 @@
             <label for="editPhone" class="visually-hidden">Phone</label>
             <input
               type="tel"
+              name="editPhone"
               id="editPhone"
               placeholder="Phone"
               aria-describedby="editPhone-error"
@@ -125,12 +126,12 @@
         <div class="modal-content">
           <button
             class="modal-close__btn"
-            id="modal-close__btn"
+            id="search-modal-close"
             aria-label="Закрыть"
           >
             ×
           </button>
-          <h2 id="modal-title">Search contacts</h2>
+          <h2 id="search-modal-title">Search contacts</h2>
           <label for="searchInput" class="visually-hidden"
             >Search by name</label
           >
@@ -139,6 +140,6 @@
         </div>
       </div>
     </div>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./dist/main.js"></script>
   </body>
 </html>

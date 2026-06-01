@@ -80,8 +80,8 @@ input {
   border-radius: 4px;
 }
 
-.modal,
-.searchModal {
+.modal {
+  opacity: 0;
   visibility: hidden;
   position: fixed;
   top: 0;
@@ -91,6 +91,7 @@ input {
   background: rgba(0, 0, 0, 0.5);
   pointer-events: none;
   z-index: 1000;
+  transition: opacity 0.2s ease;
 }
 
 .modal--visible {

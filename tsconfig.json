@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "Node16", // или "ESNext" / "Node16" для ESM
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true, // включает все строгие проверки
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

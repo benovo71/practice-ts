@@ -36,7 +36,9 @@ export function renderAlphabetIndex(): void {
  * @param contactsToShow - опциональный массив контактов для отображения (если не указан, используются все контакты)
  */
 export function renderContacts(contactsToShow: Contact[] | null = null): void {
-  const container = document.querySelector("#contactsList") as HTMLElement | null;
+  const container = document.querySelector(
+    "#contactsList",
+  ) as HTMLElement | null;
   if (!container) return;
 
   const list = contactsToShow ?? appState.contacts;
@@ -47,7 +49,7 @@ export function renderContacts(contactsToShow: Contact[] | null = null): void {
   }
 
   container.innerHTML = list
-    .sort((a: Contact, b: Contact) => a.name.localeCompare(b.name, "en"))
+    .sort((a: Contact, b: Contact) => a.name.localeCompare(b.name, "ru"))
     .map(
       (c: Contact) => `
       <div class="contact-item" data-id="${c.id}">
@@ -69,7 +71,9 @@ export function renderContacts(contactsToShow: Contact[] | null = null): void {
  * @param results - массив найденных контактов
  */
 export function renderSearchResults(results: Contact[]): void {
-  const container = document.querySelector("#searchResults") as HTMLElement | null;
+  const container = document.querySelector(
+    "#searchResults",
+  ) as HTMLElement | null;
   if (!container) return;
 
   if (results.length === 0) {
